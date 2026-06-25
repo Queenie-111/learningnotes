@@ -23,4 +23,64 @@ while i <=100:
     #print("outcome:",s)  #此时还在循环输出，因为在循环内
 print("outcome:",s) #此时结果为总和结果，在循环外，相加后了
 
+
 #while循环嵌套
+#基本格式：       #注意缩进决定层级
+#while循环条件1：
+#     循环体1
+#     while循环条件2：
+#          循环体2
+#          改变变量2
+#      改变变量1
+i=1
+while i<=3:
+    print(f"This is the {i} iteration of the outer loop")  #这是第i次外循环
+    j=1
+    while j<=5:
+        print(f"This is the  {j}  iteration of the inner loop")  #这是第j次内循环
+        j+=1
+    i+=1
+
+
+#for循环
+#for 临时变量 in 可迭代对象：  #字符串就是可迭代对象，如果是数字就加上引号让它变成字符串也就是可迭代对象
+#    循环体                 #注意冒号和缩进
+str="hellopython"          #定义一个字符串，目标是提取出这个字符串里面的每一个字母
+for i in str:              #i是临时变量，可以随便写，i是常规写法
+    print(i)
+
+#range  用来记录循环次数，相当于一个计数器
+for i in range(1,6):   #表示从1开始，从6结束，但是只输出1到5，遵循包前不包后规则，类似【），括号内只写一个数，就是数值表示的次数，且默认从0开始
+    print(i)
+
+#for循环应用：计算1+2+3+...+100的和
+s=0  #定义一个变量来保存计算结果
+for i in range(1,101):    #包前不包后，不包含101，从1-100
+    #print(i)
+    s+=i  #每循环一次计算结果与i进行相加
+    #print(“计算结果：”，s)    #输出表现为循环
+print("The calculation result is ",s)
+
+
+#break和continue    #都是在循环中专门使用的关键字
+#break某一条件满足时，退出循环
+i=1
+while i<=5:
+    print(f"she is eating the {i} apple ")   #一共5个苹果，吃到第3个的时候吃饱了，break停下
+    if i=3:
+        print("enough")   #结束break所在的这个内循环
+        break
+    i+=1   #吃的个数在叠加
+#continue退出本次循环，下一次循环继续执行
+i=1
+while i<=5:
+    print(f"she is eating the {i} apple ")
+    if i==3:
+        print("She found a worm in her food,stop eating the {i} apple ")
+              i+=1   #一定要在continue前面修改计数器，不然吃到第三个退出循环后依旧死循环
+              continue
+    i+=1
+
+
+
+
