@@ -67,7 +67,7 @@ print("The calculation result is ",s)
 i=1
 while i<=5:
     print(f"she is eating the {i} apple ")   #一共5个苹果，吃到第3个的时候吃饱了，break停下
-    if i=3:
+    if i==3:
         print("enough")   #结束break所在的这个内循环
         break
     i+=1   #吃的个数在叠加
@@ -77,8 +77,8 @@ while i<=5:
     print(f"she is eating the {i} apple ")
     if i==3:
         print("She found a worm in her food,stop eating the {i} apple ")
-              i+=1   #一定要在continue前面修改计数器，不然吃到第三个退出循环后依旧死循环
-              continue
+        i+=1   #一定要在continue前面修改计数器，不然吃到第三个退出循环后依旧死循环
+        continue
     i+=1
 
 
