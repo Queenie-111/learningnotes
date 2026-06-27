@@ -1,0 +1,58 @@
+
+#字符串编码
+#本质上就是二进制与语言文字的一一对应的关系
+a="holle"
+print(a,type(a))  #打印可以查看a的字符串类型，输出为str，表示字符串以字符为单位进行处理
+a1=a.encode()    #编码
+print("编码后:",a1)   #打印查看编码后的a1是什么样
+print(type(a1))   #打印查看a1的字符类型，输出为bytes，以字节为单位进行处理
+a2=a1.decode()    #解码
+print(a2,type(a2))  #可以查看解码后的字符类型
+
+#encode()、decode（） 类似内置函数，调用就相当于使用这两个函数进行处理字符串和字节的转换
+
+#字符串运算符
+# + 字符串拼接
+print(10+10)   #输出为20，整型相加，+是算数运算符
+print("10"+"10")  #1010,字符串相加，+是字符串拼接
+name1="wonder"
+name2="ful"
+print(name1+name2)  #输出为wonderful
+print(name1,name2) #输出为wonder ful中间有间隔
+print(name1,name2,sep="")  #输出为wonderful
+
+# * 重复输出
+print("wonderful"*5)  #表示重复输出五次，如果想要每一次输出都换行，可以加一个换行符修改为：
+print("wonderful\n"*5)
+#如果想要输出的间隔变大，可以使用制表符:\t
+
+#成员运算符
+#检查字符串中是否包含了某个子字符串（即某个字符或多个字符）
+#in：如果包含的话，返回ture，不包含返回false
+#not in：如果不包含的话返回ture，包含的话返回false
+name="wonderful"
+print("w"in name)   #ture,因为单词里面有w字母
+print("a"in name)   #false,因为单词里没有出现字母a
+print("b"not in name)  #ture,因为单词里面有b字母
+print("o"not in name)  #false,因为单词里出现了字母o
+
+#下标
+#python下标从0开始
+#作用：通过下标能够快速找到对应的数据， 字符串名[下标值]  这个括号为中括号
+name="wonderful"
+#从左往右数，下标从0开始
+print(name[0])  #输出为w
+#从右往左数，下标由-1开始
+print(name[-1])   #输出为l
+
+#切片  指对操作的对象截取其中一部分的操作
+#[开始位置：结束位置:步长]，前面两个是取值方向，最后一个数代表步长，且步长表示切取方向
+# 遵循包前不包后原则：即从起始位置开始到结束位置的前一位结束（不包含结束位置本身）
+#步长：表示选取间隔，不写步长则默认是1，步长的绝对值大小决定切取的间隔，
+# 正负号决定切取的方向，正数表示从左往右取值，负数从右往左
+st="wonderful"
+print(st[0:4])  #wond
+print(st[3:])   #derful
+print(st[:4])   #wond
+print(st[-1:])  #l
+print(st[:-1])  #wonderfu   #其实以上每个公式都在最后默认：1，但是没写出来
