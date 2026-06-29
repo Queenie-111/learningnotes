@@ -1,0 +1,185 @@
+#切片  指对操作的对象截取其中一部分的操作
+#[开始位置：结束位置:步长]，前面两个是取值方向，最后一个数代表步长，且步长表示切取方向
+# 遵循包前不包后原则：即从起始位置开始到结束位置的前一位结束（不包含结束位置本身）
+#步长：表示选取间隔，不写步长则默认是1，步长的绝对值大小决定切取的间隔，
+# 正负号决定切取的方向，正数表示从左往右取值，负数从右往左
+st="wonderful"
+print(st[0:4])  #wond
+print(st[3:])   #derful
+print(st[:4])   #wond
+print(st[-1:])  #l
+print(st[:-1])  #wonderfu   #其实以上每个公式都在最后默认：1，但是没写出来，如果想要他反着取，就写-1
+#eg：print（st[-1:-5:-1])  输出为：lufr
+print(st[0:8:2])  #wnef
+
+
+#字符串常见操作
+#查找find，检测某个字符串是否包含在字符串中，如果在就返回这个字符串开始位置的下标，，否则就返回-1
+print(st.find("n"))  #2
+print(st.find("d",6)) #输出为-1，不管下标位于第几位，输出都是-1
+#遵循包前不包后原则
+print(st.find("n",1,2)) #虽然n下标位于2，但是遵循包前不包后原则，输出-1
+
+#index():检测某个子字符串是否包含在字符串中，如果在就返回这个字符串开始位置的下标，否则报错
+print(st.index("n"))   #2
+print(st.index("n",4))  #会报错，因为从这里开始后面没有包含n这个子字符的
+#同样遵循包前不包后的原则，与find不同的是，find没找到，返回-1，index没找到报错
+
+#count（）：返回某个子字符串在整个字符串中出现的次数，没有就返回0
+print(st.count("n")) #1  只出现了一次
+print(st.count("a")) #0  没有出现
+
+
+#判断
+#startswith（）；判断是否以某个字符串开头，是的话就返回ture，不是的话就返回false，如果设置开始和结束位置下标，
+#               则在指定范围内检查
+#endswith():判断是否以某个子字符串结尾，是就返回徒惹，不是就返回false，也可以设置检查范围内
+
+st="wonerful"
+print(st.startswith("w"))   #ture
+print(st.startswith("o"))   #false
+print(st.endswith("w"))     #false
+print(st.endswith("l"))     #ture
+
+#isupper（）：检测字符串中所有字母是否都为大写，是的话就返回ture
+print(st.isupper())      #false
+print(WON.isupper())     #ture
+
+
+#修改元素
+#replace（）：替换   replace（旧内容，新内容，替换次数)替换次数可以省略，省略默认全部替换
+print(st.replace("w","o"))   #oonerful
+
+#split():指定分隔符来切字符串
+st="hello python"
+print(st.split("a"))  #["hello python"]如果字符串中不包含分割内容，就不进行分割，会作为一个整体
+print(st.split("o"))  #输出为["hell","pyth","n"]
+#还可以选择分隔次数，指定分割几次
+
+#capitalize（）：第一个字符大写，其他都小写，就算其他有大写，输出都是第一个大写其他小写
+print(st.capitalize()) #Hello python
+
+#lower（）：大写字母转为小写
+st="WonDErFul"
+print(st.lower())  #wonderful
+
+#upper():小写字母转为大写
+print(st.upper())   #WONDERFUL
+
+
+#列表
+#列表名=[元素1，元素2，元素3...],所有元素放在[]内，元素之间用逗号隔开，元素之间的数据类型可以不相同，可以有字符串类型
+li=[1,2,"a",4,5]
+#可以根据下标进行元素查找
+print(li[2])   #a
+#也可以进行切片操作
+print(li[0:3])  #[1,2,‘a’]
+#列表为可迭代对象，可以遍历取值
+for i in li:
+    print(i)
+
+
+#列表相关操作
+#添加元素：append（）  extend（）   insert（）
+li=["one","two","three"]
+li.append("four")   #整体添加
+print(li)   #输出为"one","two","three"，“four”字符作为一个整体添加
+
+li.extend("four")    #分散添加
+print(li)   #输出为"one","two","three","f","o","u","r" 分散添加，将一个类型中的元素逐个添加
+
+li.insert(0,"four")   #在指定位置添加
+print(li)   #输出为“four”，"one","two","three"，指定位置如果有元素，原有元素会后移
+
+#修改元素，直接通过下标直接进行修改
+li=[1,2,3]
+li[2]="a"
+print(li)  #输出为[1，a，3]
+
+#查找元素
+#in: 判断指定元素是否存在列表中，如果存在就返回ture，不存在就返回false
+#not in:判断指定元素是否存在列表中，如果存在就返回false，不存在就返回ture
+li=["a","b","c"]
+print("b"not in li) #false
+print("a" in li)    #ture
+
+#eg:用户输入昵称，昵称重复则不能使用
+#先定义一个列表，保存已经存在的昵称
+name_list=["haha","shushu","hehe"]
+while True:   #有循环后就不要每次都重新运行，可以一直输入直到名字不是列表已经存在的名字
+    name=input("what is your name?")
+    #判断昵称是否存在
+    if name in name_list:
+        print(f"your name {name} is exist")
+    #如果昵称不存在
+    else:
+        print(f"your name {name} is used")
+    #将昵称保存到列表
+        name_list.append("name")
+        print(name_list)  #打印出来可见列表内的昵称
+        break  #当输入自己新取的名字成功后，结束循环
+
+
+#删除元素
+# del
+li=['a','b','c']
+del li
+print(li)  #会报错，因为已经被删除
+
+#同样还可以根据下标删除
+del li[a]
+print(li)   #输出b、c，因为a被删除
+
+#pop删除指定下标的数据，python3版本默认删除最后一个元素
+li=['a','b','c']
+li.pop()   #输出a，b
+print(li)
+li.pop(0) #根据下标进行删除，可以看见输入pop后的提示为index表示下标
+print(li) #输出为b，c
+
+#remove根据元素的值进行删除
+li=['a','b','c']
+li.remove("b")  #可以看见输入后提示为object表示对象，可以直接把元素放入，默认删除最开始出现的指定元素
+print(li)  #输出为b、c
+
+
+#排序
+#sort：将列表按特定的顺序重新排序，默认从小到大
+li=['1','4','67','3','5']
+li.sort()
+print(li)  #输出为1、3、4、5、67
+
+#reverse，将整个列表倒过来，5，3，67，4，1，如果和sort一起用就可以实现从大到小的效果
+li.sort()
+li.reverse()
+print(li)   #输出为67，5，4，3，1
+
+#列表推导式
+#格式一：[表达式 for 变量 in 列表] in后面不仅可以放列表还可以放range（）、可迭代对象
+li=[1,2,3,4,5,6]
+#[print(i) for i in li] 前面的i是表达式
+li=[]
+for i in range (1,6):
+    #print(i)
+    li.append(i)  #把li元素1放进列表中了
+print(li)
+
+[li.append(i) for i in range(1,6)]
+print(li)  #结果和上方相同
+
+#格式二：[表达式 for 变量 in 列表 if 条件]
+#把奇数放入列表
+li=[]
+for i in range (1,6):
+    if i%2==1:  #表示余数为1，则i是奇数
+        li.append(i)
+print(li)    #输出为135
+#用格式表示
+[li.append(i) for i in range(1,6) if i%2==1]
+print(li)
+
+
+#列表嵌套   一个列表里面又有一个列表
+li=[1,2,3,[4,5,6]]  #[4,5,6]是里面的列表
+print(li[3]) #输出的为里面的整个列表因为是取出下标
+print(li[3][2])   #取出内列表里的元素，下标为2的元素
