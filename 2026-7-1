@@ -1,1 +1,140 @@
+#深浅拷贝针对可变对象
 
+
+#可变对象：储存空间保存的数据允许被修改，这种数据就是可变类型，值可以修改，但是内存地址不会改变
+#列表list、字典dict、集合set
+li=[1,2,3,4]
+print('memory address:',id(li))
+li.append(5)
+print(li)
+print('memory address:',id(li))   #在添加5后内存地址不变
+
+#不可变类型  变量对应的值不能被修改，如果修改就会产生一个新的值从而分配新的内存地址
+#数值类型：int、bool、float、complex   字符串：str  元组：tuple
+n=10  #整型
+print('before:',n,id(n))
+n=15
+print('after:',n,id(n)) #内存地址变化，会产生新的值，重新赋值给变量n
+
+#函数基础
+#将独立的代码块组成一个整体，使其具有特殊功能的代码集，在需要的时候再去调用，提高代码的重用性，使整体看上去更简练
+
+def login():   #def表示要创建一个函数
+    print("This is the login function")
+login()    #这是调用的意思，调用几次函数代码就会运行几次
+
+#编写一个打招呼的函数并调用它
+def say_hello():
+    print("Hello")
+    print('huahau')
+say_hello()
+
+#返回值  执行结束后，最后给调用者的一个结果
+def buy():
+    return"a cup of tea"
+buy()
+print(buy())
+#函数中遇到return，表示此函数结束，不继续运行，return可以返回多个值，以元组的形式返回
+#print与return的区别  1、return表示函数结束，print会一直执行
+#                    2、return是返回计算值，print是打印结果
+
+#参数
+#def 函数名（形参a，形参b）：  形参表示定义函数时，小括号里面的变量
+#    函数体
+#    ...（如：a=1，b=2）
+#调用格式：
+#函数名（实参1，实参2）    实参表示调用函数时，小括号里面的具体的值
+def add(a,b):
+    return a+b
+print(add(1,2))    #相当于a=1，b=2,print出return=3
+
+#函数参数
+#必备参数（位置参数）传递和定义参数的顺序及个数必须一致
+def funa(name,age,sex):
+    print('name',name)
+    print('age',age)
+    print('sex',sex)
+funa('huahua',18,'girl')
+
+#默认参数   为参数提供默认值，调用函数时可不传该默认参数的值,所有参数必须出现在默认参数前，包括函数定义和调用
+def funb(a=8):   #如果def funb（a=8，b)会报错，把b写在成b，a=8表示a和b的默认参数都是8
+    print(a)
+funb()  #输出为8默认传值
+funb(200)  #输出为200此时修改默认值为两百了
+
+#可变参数  传入的值的数量时可以改变的，可以传入多个，也可以不传，以元组的方式
+#格式：def func（*args）   这个args可以变但是*有特殊含义
+def func(*argus):
+    print(argus)
+func(1,2,3)
+
+#关键字参数   以字典方式赋值
+#格式：def func(**kwargs)
+def func(**kwargs):
+    print(kwargs)
+func(name='huahau',age=18)
+
+#函数嵌套
+#嵌套调用，在一个函数里面调用另一个函数
+def study():
+    print("study at night")
+def course():
+    study()     #此处就是函数调用，调用上面的函数可以直接输出
+    print("course is python")
+course()
+
+#嵌套定义
+def study():
+    print("study at night")
+    def course():    #不要在内层函数调用外层函数
+        print("coerse is python")
+    course()   #此处要调用一下
+study()
+
+
+#作用域   指的是变量生效的范围，分为两种，全局变量和局部变量
+#全局变量  函数外部定义的变量，在整个文件中都有效
+a=100    #全局变量
+def test1():
+    print("this is the value stored in test1:",a)
+def test2():
+    a=120
+    print("this is the value stored in test2:",a)
+test1()
+test2()
+
+#局部变量   函数内部定义的变量，从定义位置开始到函数定义结束位置有效
+def funa():
+    num=10  #局部变量，如果在函数外部打印的话是会报错
+    print('num:',num)
+funa()
+#作用：在函数内部临时保存数据，即当函数调用完成后，就销毁局部数据
+
+#作用域
+#当全局变量和局部变量命名相同，在函数内部修改全局变量的值，可以使用global关键字
+a=100    #全局变量
+def test1():
+    print("this is the value stored in test1:",a)
+def test2():
+    global a   #声明全局变量
+    a=120      #局部变量
+    print("this is the value stored in test2:",a)
+test1()
+test2()
+#多个变量需要声明
+#写成： global name，age
+
+#nonlogal只对上一层函数进行修改
+a=10    #全局变量
+def outer():
+    a=5    #局部变量
+    def inner():    #内函数
+        a=20       
+        def inner2():
+            a=30
+            print("this is the value stored in inner2:",a)
+            inner2()
+        print("this is the value stored in inner:",a)
+    inner()
+    print("this is the value stored in outer :",a)
+outer()
