@@ -1,1 +1,78 @@
 
+#匿名函数
+#函数名=lambda 形参：返回值
+#普通函数：
+#def add(a,b)
+#    return a+b
+#print(add(1,3)
+#以匿名函数的方式写
+add=lambda a,b: a+b      #a,b就是匿名函数的形参，a+b就是返回值的表达式
+#lambda不需要写return来返回值，表达式本身结果就是返回
+print(add(1,3))
+
+#lambda的参数形式
+#无参数
+funa=lambda:'a cup of tea'
+print(funa())
+
+#一个参数
+funb=lambda name:name
+print(funb('huahua'))
+
+#默认参数  默认参数写在非默认参数后面
+func=lambda name,age=18:(name,age)   #此处这个age=18就是默认参数
+print(func("huahua"))
+print(func("huahua",20))#可以输入两个
+#可以用作计算
+fune=lambda a,b,c=12:a+b+c
+print(fune(1,2,4))  #相当于修改默认参数把12改成4
+print(fune(1,2))       #相当于保持默认参数
+
+
+#lambda结合if判断
+a=5
+b=8
+print('a smaller than b') if a<b else print('a greater than or equal to b')
+comp = lambda a,b:'a smaller than b'if a<b else ('a greater than or equal to b')#a\b是形参，比较大小
+print(comp(a,b))
+
+#内置函数
+#查看所有的内置函数
+import builtins
+print(dir(builtins))#大写字母开头的一般是内置常量名，小写字母开头的一般是内置函数名
+#内置函数abs()  返回绝对值
+print(abs(-10))
+#内置函数sum（）  求和,可以用元组、列表，不能用字符串、字典
+print(sum((1,2,3)))
+#求最小值min()
+print(min(4,1,8))
+#求最大值max()
+print(max(4,1,8))
+#比较绝对值大小
+print(min(-8,5,key=abs))#key是一个函数参数，是比较大小的方法
+
+#zip()  将可迭代对象作为参数，将对象中对应的元素打包成一个个元组
+li=[1,2,3]
+li2=['a','b','c']
+print(zip(li,li2))#打包好了但是是一个zip对象，需要其他方式取出元组
+#第一个方法：通过for循环
+for i in zip(li,li2):
+    print(i)  #输出为（1,‘a')、(2,'b') 、(3,'c')
+    #如果元素个数不一致，就按照长度最短的返回
+#第二种方式：转换成列表打印
+print(list(zip(li,li2)))  #输出为[（1,’a'）,（2,'b'）,（3,'c'）]
+
+#map()映射函数   对可迭代对象种的每一个元素进行映射，分别去执行
+#map(func,iter1)   func--自己定义的函数，iter1--要放进去的可迭代对象，对象中的每一个元素都会去执行函数
+li=[1,2,3]
+def funa(x):
+    return x * 5
+print(list(map(funa,li))) #或者用一个mp变量接收map（funa，li）可以写成print（list（mp))),如果直接print（mp)出来的是一个对象
+#                          需要用for循环或者列表的方式取出
+#输出为5，10，15
+#或者用lambda函数写
+funa=lambda x:x*5
+print(list(map(funa,li)))
+
+#reduce()   先把对象中两个元素取出来，计算出一个值然后保存着，接下来把这个计算值跟第三个元素进行计算
+
